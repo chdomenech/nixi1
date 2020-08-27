@@ -4,7 +4,6 @@ const Country = require("../models/country");
 const app = express();
 app.use(cors());
 
-
 /** 
  * Get Countries 
  * */
