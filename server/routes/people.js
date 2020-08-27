@@ -1,38 +1,37 @@
 const express = require("express");
 const cors = require('cors');
 const People = require("../models/people");
-
+const peopleBackend = require("../backend/people");
 const app = express();
 app.use(cors());
 
-
 /**
- * Register a people
+ * Register 
  */
-app.put("/api/people/register",(req, res) => {
+app.put("/api/people/register",(req, resp) => {
   let body = req.body;
   
-    const data = {
-		ruc:body.ruc,
-		phone:body.phone,
-		email:body.email,
-		gender:body.gender,
-		name: body.name
+  const data = {
+      ruc:body.ruc,
+      phone:body.phone,
+      email:body.email,
+      gender:body.gender,
+      name: body.name
   }  
-  
-	let people = new People(data);  
-	 people.save((err, people) => {
-		if (err) {
-		  return res.status(400).json({
-			ok: false,
-			err,
-		  });
-		}
-		res.json({
-		  ok: true,
-		  saved: true,
-		});
-	});
+
+  peopleBackend.savePeople(data).then(result=>{
+    resp.json({
+      ok: true,
+      saved:true,
+      data: result
+    }); 
+
+    }).catch(err => {
+      return resp.status(400).json({
+        ok: false,
+        err
+      });          
+    });
 });
 
 /** 

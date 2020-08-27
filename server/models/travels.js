@@ -3,30 +3,30 @@ let Schema = mongoose.Schema;
 
 let travelsSchema = new Schema({
 
-  person:[{
+  people:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "person"
+    ref: "people",
+    required: [true, 'required']	
   }],
 
 	city:[{
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "city"
+    ref: "city",
+    required: [true, 'required']	
 	}],
-	country:[{
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "country"
-	}],	  
   date: {
     type: Date,
+    required: [true, 'required']	
   },  
   
   type:{
-	type: String,  
+    type: String,  
+    required: [true, 'required']	
   },
   
   flyNumber:{	  
-	type: String,
-	required: [true, 'required']	
+	  type: String,
+	  required: [true, 'required']	
   },  
   
   status: {
@@ -46,4 +46,4 @@ travelsSchema.methods.toJSON = function() {
 
 }
 
-module.exports = mongoose.model('wallets', travelsSchema);
+module.exports = mongoose.model('travels', travelsSchema);
