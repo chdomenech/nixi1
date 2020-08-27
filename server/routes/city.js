@@ -41,7 +41,8 @@ app.put("/api/city/saveCity", (req, res) => {
 			}
 			res.json({
 			  ok: true,
-			  saved: true,
+				saved: true,
+				city
 			});
 		});
 	});
